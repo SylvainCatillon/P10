@@ -1,0 +1,18 @@
+language: python
+python:
+  - '3.7'
+
+before_script:
+  - pip install -r requirements.txt
+
+env: DJANGO_SETTINGS_MODULE='PurBeurre_WebApp.settings'
+
+services:
+  - postgresql
+
+script:
+  - ./manage.py test
+
+branches:
+  only:
+    - staging
