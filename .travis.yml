@@ -11,7 +11,7 @@ services:
   - postgresql
 
 script:
-  - python ./manage.py test
+  - python ./manage.py test --exclude-tag=selenium
 
 branches:
   only:
