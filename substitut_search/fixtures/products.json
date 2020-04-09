@@ -3,6 +3,7 @@
     "model": "substitut_search.product",
     "pk": 1,
     "fields": {
+        "code": "246825",
         "nutriscore": "a",
         "categories": "[\"en:test\"]",
         "name": "test1",
@@ -15,6 +16,7 @@
     "model": "substitut_search.product",
     "pk": 2,
     "fields": {
+        "code": "459562",
         "nutriscore": "d",
         "categories": "[\"en:test\"]",
         "name": "test2",

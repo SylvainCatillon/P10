@@ -38,7 +38,7 @@ def search(request):
 
 def find(request):
     """
-    Takes a request GET with a product id
+    Takes a request GET with a product pk
     Displays substituts to the initial product
 
     Template: "substitut_search/find.html"
@@ -46,8 +46,8 @@ def find(request):
         "initial_product": the product in the initial search,
         "products": a list of the products found as substituts}
     """
-    product_id = request.GET.get("product_id")
-    product = get_object_or_404(Product, id=product_id)
+    product_pk = request.GET.get("product_id")
+    product = get_object_or_404(Product, pk=product_pk)
     substituts = []
     max_sbts = NB_DISPLAYED_PRODUCTS
     #  search in categories, starting from the smaller
@@ -71,19 +71,19 @@ def find(request):
 
 def detail(request):
     """
-    Takes a request GET with a product id
+    Takes a request GET with a product pk
     Displays the informations of the product
 
     Template: "substitut_search/detail.html"
     Context: {"product": the searched product}
     """
-    product_id = request.GET.get("product_id")
-    product = get_object_or_404(Product, id=product_id)
+    product_pk = request.GET.get("product_id")
+    product = get_object_or_404(Product, pk=product_pk)
     return render(request, "substitut_search/detail.html", {"product": product})
 
 def favories(request):
     """
-    Takes a request GET or POST with a product id
+    Takes a request GET or POST with a product pk
     If the method is POST, save the product in the user favories
     Else, displays the saved products of the user
 
@@ -96,8 +96,8 @@ def favories(request):
         return render(request, "substitut_search/favories_unlogged.html")
     #  if the request method is POST, save the product in the user favories
     if request.method == "POST":
-        product_id = request.POST.get('product_id')
-        product = get_object_or_404(Product, id=product_id)
+        product_pk = request.POST.get('product_pk')
+        product = get_object_or_404(Product, pk=product_pk)
         user.profile.favories.add(product)
         #  return an HttpResponse which will be displayed by a jquerry script
         return HttpResponse("Produit sauvegardé")

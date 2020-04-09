@@ -3,6 +3,7 @@ from django.contrib.postgres.fields import ArrayField
 
 class Product(models.Model):
     """A product downloaded from OpenFoodFacts"""
+    code = models.CharField(max_length=50, primary_key=True)
     ns_choices = [("a", "A"), ("b", "B"), ("c", "C"), ("d", "D"), ("e", "E")]
     nutriscore = models.CharField(
         max_length=1, choices=ns_choices, db_index=True)

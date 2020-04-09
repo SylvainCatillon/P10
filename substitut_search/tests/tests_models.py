@@ -6,6 +6,7 @@ from ..models import Product
 def create_product():
     """Create a product for testing purpose"""
     product_info = {
+        "code": "2159404",
         "nutriscore": "a",
         "categories": ["en:test"],
         "name": "test1",

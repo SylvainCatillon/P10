@@ -79,9 +79,9 @@ WSGI_APPLICATION = 'PurBeurre_WebApp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'purbeurre',
-        'USER': 'purbeurre_admin',
-        'PASSWORD': 'purbeurre_admin_password',
+        'NAME': 'p10',
+        'USER': 'p10_admin',
+        'PASSWORD': 'p10_admin_password',
         'HOST': '',
         'PORT': '5432',
     }
@@ -129,5 +129,3 @@ STATIC_URL = '/static/'
 # Url to redirect to after login or logout
 LOGIN_REDIRECT_URL = '/accounts/myaccount/'
 LOGOUT_REDIRECT_URL = '/'
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

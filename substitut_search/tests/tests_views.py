@@ -13,6 +13,7 @@ class TestFillDB(TestCase):
     nutrients = ['fat', 'saturated-fat', 'sugars', 'salt']
     MOCK_PRODUCTS = [
         {
+            "code": "125547",
             "nutrition_grade_fr": "a",
             "categories_tags": ["en:test"],
             "product_name": "test1",
@@ -21,6 +22,7 @@ class TestFillDB(TestCase):
             "nutrient_levels": {e: "low" for e in nutrients},
             'nutriments': {e+'_100g': '2' for e in nutrients}
         }, {
+            "code": "243547",
             "nutrition_grade_fr": "b",
             "categories_tags": ["en:test"],
             "product_name": "test2",
@@ -73,7 +75,7 @@ class TestSearchProduct(TestCase):
     def test_find_a_substitut(self):
         product = Product.objects.order_by('-nutriscore')[0]
         response = self.client.get(
-            f"{reverse('substitut:find')}?product_id={product.id}")
+            f"{reverse('substitut:find')}?product_id={product.pk}")
         self.assertLess(
             response.context['products'][0].nutriscore, product.nutriscore)
 
@@ -83,9 +85,9 @@ class TestProductPage(TestCase):
     # test product page contains the required informations
     def test_product_page(self):
         product = Product.objects.all()[0]
-        product_id = product.id
+        product_pk = product.pk
         response = self.client.get(
-            f"{reverse('substitut:detail')}?product_id={product_id}")
+            f"{reverse('substitut:detail')}?product_id={product_pk}")
         self.assertContains(response, product.name)
         self.assertContains(response, product.nutriscore)
         self.assertContains(response, product.link)
@@ -113,9 +115,9 @@ class TestFavories(TestCase):
 
     # test a favory is saved
     def test_save_favory(self):
-        product_id = self.product.id
+        product_pk = self.product.pk
         response = self.client.post(
-            reverse("substitut:favories"), {"product_id": product_id})
+            reverse("substitut:favories"), {"product_pk": product_pk})
         self.assertEqual(response.status_code, 200)
         self.assertIn(self.product, self.user.profile.favories.all())
 

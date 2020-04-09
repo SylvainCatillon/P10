@@ -11,7 +11,7 @@
         <p class="card-title h6">{{ product.name }}</p>
         <form class="form-inline" action="{% url action %}" method="get">
           {% csrf_token %}
-          <input type="hidden" class="hidden" value="{{ product.id }}" name="product_id">
+          <input type="hidden" class="hidden" value="{{ product.pk }}" name="product_id">
           <button type="submit" class="btn btn-primary">{{ button_title }}</button>
         </form>
         {% if save %}
@@ -20,7 +20,7 @@
           {% else %}
           <form class="save_form form-inline" action="{% url 'substitut:favories' %}">
             {% csrf_token %}
-            <input type="hidden" class="hidden" value="{{ product.id }}" name="product_id">
+            <input type="hidden" class="hidden" value="{{ product.pk }}" name="product_id">
             <button type="submit" class="btn btn-primary mt-3"{% if not user.is_authenticated %} title="Veuillez vous connecter pour sauvegarder vos produits" disabled {% endif %}><i class="fas fa-save mr-3"></i>Sauvegarder</button>
           </form>
           {% endif %}

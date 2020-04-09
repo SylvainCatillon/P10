@@ -78,6 +78,7 @@ class FillDB:
         for product in products_list:
             #  if the product doesn't contain the right info, go to the next
             try:
+                code = product["code"]
                 nutriscore = product["nutrition_grade_fr"].lower()
                 categories = product["categories_tags"]
                 name = product["product_name"].title()
@@ -90,6 +91,7 @@ class FillDB:
             try:
                 with transaction.atomic():
                     Product.objects.create(
+                        code=code,
                         nutriscore=nutriscore,
                         categories=categories,
                         name=name, link=link, image=image,
