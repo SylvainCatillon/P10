@@ -11,8 +11,11 @@ services:
   - postgresql
 
 script:
-  - python ./manage.py test --exclude-tag=selenium
+  - python ./manage.py test
+
+addons:
+  firefox: '49.0'
 
 branches:
   only:
-    - master
+    - staging
