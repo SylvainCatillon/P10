@@ -1,54 +1,9 @@
-from unittest.mock import Mock
-from unittest import skip
-
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
 
-
 from ..models import Product
-from ..utils.fill_db import FillDB
 
-class TestFillDB(TestCase):
-    nutrients = ['fat', 'saturated-fat', 'sugars', 'salt']
-    MOCK_PRODUCTS = [
-        {
-            "code": "125547",
-            "nutrition_grade_fr": "a",
-            "categories_tags": ["en:test"],
-            "product_name": "test1",
-            "url": "https//test.com",
-            "image_front_small_url": "https//test.com",
-            "nutrient_levels": {e: "low" for e in nutrients},
-            'nutriments': {e+'_100g': '2' for e in nutrients}
-        }, {
-            "code": "243547",
-            "nutrition_grade_fr": "b",
-            "categories_tags": ["en:test"],
-            "product_name": "test2",
-            "url": "https//test2.com",
-            "image_front_small_url": "https//test2.com"
-        },
-    ]
-
-    # test insert mocked products
-    def test_insert_products(self):
-        self.assertEqual(Product.objects.count(), 0)
-        fill_db = FillDB()
-        fill_db.dl_products = Mock(return_value=self.MOCK_PRODUCTS)
-        fill_db.insert_products()
-        fill_db.dl_products.assert_called_once()
-        self.assertQuerysetEqual(
-            list(Product.objects.all()),
-            ['<Product: Test1>', '<Product: Test2>'])
-
-    # test download and insert products
-    @skip("very long test using API call")
-    def test_insert_products_no_mock(self):
-        self.assertEqual(Product.objects.count(), 0)
-        fill_db = FillDB()
-        fill_db.insert_products()
-        self.assertGreater(Product.objects.count(), 200)
 
 class TestSearchProduct(TestCase):
     fixtures = ['products']

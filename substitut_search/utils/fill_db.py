@@ -98,3 +98,30 @@ class FillDB:
                         nutrient_levels=nutrient_levels)
             except (IntegrityError, DataError) as error:
                 continue
+
+    def update_products(self):
+        products_list = self.dl_products()
+        for product in products_list:
+            #  if the product doesn't contain the right info, go to the next
+            try:
+                code = product["code"]
+                nutriscore = product["nutrition_grade_fr"].lower()
+                categories = product["categories_tags"]
+                name = product["product_name"].title()
+                link = product["url"]
+                image = product["image_front_small_url"]
+            except KeyError as error:
+                continue
+            nutrient_levels = get_nutrients(product)
+            try:
+                with transaction.atomic():
+                    Product.objects.filter(code=product['code']).update(
+                        nutriscore=nutriscore,
+                        categories=categories,
+                        name=name, link=link, image=image,
+                        nutrient_levels=nutrient_levels)
+            except (Product.DoesNotExist, IntegrityError, DataError) as error:
+                print("Warning, catched error while updating the database: " + 
+                    str(error))
+                continue
+

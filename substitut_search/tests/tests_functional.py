@@ -28,7 +28,7 @@ class TestFavoriesSelenium(StaticLiveServerTestCase):
         product = Product.objects.order_by('-nutriscore')[0]
         # assert that the user has no favories saved
         self.assertEqual(len(user.profile.favories.all()), 0)
-        find_url = f"{reverse('substitut:find')}?product_id={product.id}"
+        find_url = f"{reverse('substitut:find')}?product_id={product.pk}"
         self.selenium.get(self.live_server_url+find_url)
         fav_url = reverse('substitut:favories')
         self.selenium.find_element_by_xpath(
