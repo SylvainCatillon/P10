@@ -96,7 +96,7 @@ def favories(request):
         return render(request, "substitut_search/favories_unlogged.html")
     #  if the request method is POST, save the product in the user favories
     if request.method == "POST":
-        product_pk = request.POST.get('product_pk')
+        product_pk = request.POST.get('product_id')
         product = get_object_or_404(Product, pk=product_pk)
         user.profile.favories.add(product)
         #  return an HttpResponse which will be displayed by a jquerry script

@@ -72,7 +72,7 @@ class TestFavories(TestCase):
     def test_save_favory(self):
         product_pk = self.product.pk
         response = self.client.post(
-            reverse("substitut:favories"), {"product_pk": product_pk})
+            reverse("substitut:favories"), {"product_id": product_pk})
         self.assertEqual(response.status_code, 200)
         self.assertIn(self.product, self.user.profile.favories.all())
 

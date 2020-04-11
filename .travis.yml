@@ -5,7 +5,10 @@ python:
 before_script:
   - pip install -r requirements.txt
 
-env: DJANGO_SETTINGS_MODULE='PurBeurre_WebApp.settings.travis'
+env: 
+  - DJANGO_SETTINGS_MODULE='PurBeurre_WebApp.settings.travis'
+  global:
+    - MOZ_HEADLESS=1
 
 services:
   - postgresql
@@ -14,7 +17,7 @@ script:
   - python ./manage.py test
 
 addons:
-  firefox: '49.0'
+  firefox: latest
 
 branches:
   only:
