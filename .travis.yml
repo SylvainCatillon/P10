@@ -6,8 +6,9 @@ before_script:
   - pip install -r requirements.txt
 
 env: 
-  - DJANGO_SETTINGS_MODULE='PurBeurre_WebApp.settings.travis'
-  - MOZ_HEADLESS=1
+  global:
+    - MOZ_HEADLESS=1
+    - DJANGO_SETTINGS_MODULE='PurBeurre_WebApp.settings.travis'
 
 services:
   - postgresql
