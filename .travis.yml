@@ -18,6 +18,9 @@ script:
 
 addons:
   firefox: latest
+  apt:
+    packages:
+      firefox-geckodriver
 
 branches:
   only:
