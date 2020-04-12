@@ -7,8 +7,7 @@ before_script:
 
 env: 
   - DJANGO_SETTINGS_MODULE='PurBeurre_WebApp.settings.travis'
-  global:
-    - MOZ_HEADLESS=1
+  - MOZ_HEADLESS=1
 
 services:
   - postgresql
