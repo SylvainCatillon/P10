@@ -72,7 +72,7 @@ class FillDB:
         return products_list
 
     def insert_products(self):
-        """Launch 'dl_products' to the products from OpenFoodfacts.org
+        """Launch 'dl_products' to download the products from OpenFoodfacts.org
         then insert the products in the database"""
         products_list = self.dl_products()
         for product in products_list:
@@ -100,6 +100,8 @@ class FillDB:
                 continue
 
     def update_products(self):
+        """Launch 'dl_products' to download the products from OpenFoodfacts.org
+        then update the products in the database"""
         products_list = self.dl_products()
         for product in products_list:
             #  if the product doesn't contain the right info, go to the next
@@ -124,4 +126,3 @@ class FillDB:
                 print("Warning, catched error while updating the database: " + 
                     str(error))
                 continue
-
