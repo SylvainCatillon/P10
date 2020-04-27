@@ -51,7 +51,8 @@ class FillDB:
         headers = {'user-agent': 'PurBeurre_WebApp - Version 1.0'}
         raw_result = requests.get(
             "https://fr.openfoodfacts.org/cgi/search.pl",
-            params=payload)
+            params=payload,
+            headers=headers)
         return raw_result.json()["products"]
 
     def dl_products(self):
